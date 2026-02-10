@@ -354,50 +354,6 @@ export default function App() {
               </div>
             </section>
 
-{/* Languages */}
-            <section className="mb-6 print:break-before-page print:pt-6">
-              <h2 className="text-lg text-gray-800 mb-3 pb-2 border-b-2 border-gray-600 flex items-center gap-2">
-                <Globe className="w-4 h-4" />
-                Languages
-              </h2>
-
-              <div className="space-y-2">
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm text-gray-800">
-                      English
-                    </span>
-                    <span className="text-xs text-gray-600">
-                      Native
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-gray-600 h-2 rounded-full"
-                      style={{ width: "100%" }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm text-gray-800">
-                      Hindi
-                    </span>
-                    <span className="text-xs text-gray-600">
-                      Native
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-gray-600 h-2 rounded-full"
-                      style={{ width: "100%" }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
             {/* Notable Projects */}
             <section>
               <h2 className="text-lg text-gray-800 mb-3 pb-2 border-b-2 border-gray-600 flex items-center gap-2">
