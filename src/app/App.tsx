@@ -58,7 +58,7 @@ export default function App() {
 
                 <li>Previously, served as Network Lead at EA Sports.</li>
                 <li>Responsible for architecting a low-latency and bandwidth network gameplay system for an unannounced Massive Multiplayer Online (MMO) title at EA Sports.</li>
-                <li>Implemented a mass testing tool using Python and Protobuf on EA's internal cloud infrastructure.</li>
+                <li>Implemented a mass testing tool using Python and gRPC on EA's internal cloud infrastructure.</li>
               </ul>
             </section>
 
