@@ -4,10 +4,8 @@ import {
   MapPin,
   Linkedin,
   GraduationCap,
-  Globe,
   Briefcase,
 } from "lucide-react";
-import profileImage from "../resources/Me.jpg";
 
 export default function App() {
   return (
@@ -15,20 +13,13 @@ export default function App() {
       <div className="bg-white shadow-lg w-[794px]">
 {/* Header Section */}
         <div className="bg-gradient-to-r from-gray-700 to-gray-900 text-white p-6">
-          <div className="flex items-center gap-5">
-            <img
-              src={profileImage}
-              alt="Himanshu Chablani"
-              className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
-            />
-            <div>
-              <h1 className="text-2xl mb-2">
-                Himanshu Chablani
-              </h1>
-              <p className="text-lg text-gray-100">
-                Senior Software Engineer @ Meta
-              </p>
-            </div>
+          <div>
+            <h1 className="text-2xl mb-2">
+              Himanshu Chablani
+            </h1>
+            <p className="text-lg text-gray-100">
+              Senior Software Engineer @ Meta
+            </p>
           </div>
         </div>
 

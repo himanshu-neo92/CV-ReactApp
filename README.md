@@ -34,10 +34,8 @@ CV-ReactApp/
     ├── main.tsx            # Application entry — mounts <App /> to DOM
     ├── index.css           # Global styles + Tailwind directives + print styles
     ├── vite-env.d.ts       # Vite client type declarations
-    ├── app/
-    │   └── App.tsx         # Main CV component (all sections)
-    └── resources/
-        └── Me.jpg          # Profile photo
+    └── app/
+        └── App.tsx         # Main CV component (all sections)
 ```
 
 ---
@@ -150,29 +148,21 @@ All CV content lives in a single file: `src/app/App.tsx`. The sections below wal
 
 ---
 
-### 1. Profile — Name, Title & Photo
+### 1. Profile — Name & Title
 
 Located in the header gradient banner at the top of `App.tsx`:
 
 ```tsx
-<img
-  src={profileImage}            {/* imported from ../resources/Me.jpg */}
-  alt="Himanshu Chablani"
-  className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
-/>
-<div>
-  <h1 className="text-2xl mb-2">Himanshu Chablani</h1>
-  <p className="text-lg text-gray-100">Senior Software Engineer @ Meta</p>
-</div>
+<h1 className="text-2xl mb-2">Himanshu Chablani</h1>
+<p className="text-lg text-gray-100">Senior Software Engineer @ Meta</p>
 ```
 
 | What to change | How |
 |---|---|
-| **Photo** | Replace `src/resources/Me.jpg` with your own image (keep the same filename, or update the import at the top of `App.tsx`). Square aspect ratio works best. |
 | **Name** | Edit the text inside `<h1>`. |
 | **Job title** | Edit the text inside the `<p>` below the `<h1>`. |
-| **Photo size** | Adjust `w-24 h-24` (Tailwind size classes). `w-32 h-32` = larger, `w-20 h-20` = smaller. |
-| **Photo shape** | `rounded-full` = circle. Use `rounded-lg` for rounded rectangle, or remove for square. |
+
+To add a profile photo, import an image and add an `<img>` tag inside the header `<div>`.
 
 ---
 
