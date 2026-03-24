@@ -15,7 +15,7 @@ A modern, responsive, and print-ready personal CV/resume built as a single-page 
 - **Print-Optimized** — Dedicated `@media print` styles ensure pixel-perfect A4 output when printing to PDF or paper, including colour preservation and proper page breaks.
 - **Modern Stack** — React 19 with strict mode, Vite 6 for lightning-fast HMR, and TypeScript for type safety.
 - **Tailwind CSS Styling** — Utility-first CSS with no custom component library required.
-- **Icon Set** — Uses [Lucide React](https://lucide.dev/) for crisp, consistent SVG icons (Mail, Phone, MapPin, LinkedIn, etc.).
+- **Icon Set** — Uses [Lucide React](https://lucide.dev/) for crisp, consistent SVG icons (Mail, Phone, MapPin, LinkedIn, Github, etc.).
 - **Single Component Architecture** — Entire CV rendered from a single `App.tsx` component for simplicity and easy customisation.
 
 ---
@@ -117,14 +117,14 @@ The CV uses a two-column grid layout:
 
 ### Sections Breakdown
 
-- **Header** — Dark gradient banner with profile photo, name, and current title.
+- **Header** — Dark gradient banner with name and current title.
 - **About Me** — Professional summary paragraph.
-- **Technical Summary** — Bullet-pointed career highlights.
-- **Work Experience** — Chronological roles with company, dates, and achievements.
+- **Technical Summary** — Bullet-pointed career highlights with quantified metrics.
+- **Work Experience** — Chronological roles with inline company name, dates, and achievements.
 - **Education** — Degrees with institutions, dates, grades, and descriptions.
-- **Contact** — Email, phone, location, and LinkedIn with icons.
+- **Contact** — Email, phone, location, LinkedIn, and GitHub with icons.
 - **Skills** — Categorised pill-style tags (Technical, Programming Languages, Frameworks & Tools, Soft Skills).
-- **Notable Projects** — Linked list of shipped products and titles.
+- **Notable Projects** — Linked list of shipped products and titles (breaks to a new page when printing).
 
 ---
 
@@ -153,14 +153,15 @@ All CV content lives in a single file: `src/app/App.tsx`. The sections below wal
 Located in the header gradient banner at the top of `App.tsx`:
 
 ```tsx
-<h1 className="text-2xl mb-2">Himanshu Chablani</h1>
-<p className="text-lg text-gray-100">Senior Software Engineer @ Meta</p>
+<h1 className="text-[1.35rem] mb-1">Himanshu Chablani</h1>
+<p className="text-base text-gray-100">Senior Software Engineer @ Meta</p>
 ```
 
 | What to change | How |
 |---|---|
 | **Name** | Edit the text inside `<h1>`. |
 | **Job title** | Edit the text inside the `<p>` below the `<h1>`. |
+| **Title size** | Adjust `text-[1.35rem]` — use any Tailwind text size or arbitrary value. |
 
 To add a profile photo, import an image and add an `<img>` tag inside the header `<div>`.
 
@@ -183,17 +184,18 @@ To modify:
 - **Phone** — Update the text next to `<Phone>`.
 - **Location** — Update the text next to `<MapPin>`.
 - **LinkedIn** — Update the `href` and display text inside the `<a>` tag next to `<Linkedin>`.
+- **GitHub** — Update the `href` and display text inside the `<a>` tag next to `<Github>`.
 
-**Adding a new contact item** (e.g., GitHub):
+**Adding a new contact item** (e.g., Twitter/X):
 
 ```tsx
-import { Github } from "lucide-react";  // add to imports
+import { Twitter } from "lucide-react";  // add to imports
 
 <div className="flex items-center gap-3 text-gray-700">
-  <Github className="w-4 h-4 text-gray-600" />
-  <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer"
-     className="text-sm hover:underline">
-    your-username
+  <Twitter className="w-4 h-4 text-gray-600" />
+  <a href="https://twitter.com/your-handle" target="_blank" rel="noopener noreferrer"
+     className="text-sm underline">
+    @your-handle
   </a>
 </div>
 ```
@@ -208,8 +210,8 @@ Both sections are simple text blocks in the left column:
 
 ```tsx
 {/* About Me */}
-<section className="mb-8">
-  <h2 className="text-xl text-gray-800 mb-4 pb-2 border-b-2 border-gray-600">
+<section className="mb-8 print:mb-4">
+  <h2 className="text-lg text-gray-800 mb-4 pb-2 border-b-2 border-gray-600">
     About Me
   </h2>
   <p className="text-sm text-gray-700 leading-relaxed">
@@ -218,6 +220,8 @@ Both sections are simple text blocks in the left column:
 </section>
 ```
 
+Note the `print:mb-4` class — this reduces bottom margin when printing. Other sections use `print:mb-2` for tighter print spacing.
+
 - Replace the paragraph text with your own professional summary.
 - For **Technical Summary**, edit the `<li>` items inside the `<ul>`. Add or remove `<li>` entries as needed.
 
@@ -225,16 +229,15 @@ Both sections are simple text blocks in the left column:
 
 ### 4. Work Experience
 
-Each job follows this repeatable template:
+Each job follows this repeatable template with the company name inline:
 
 ```tsx
 <div className="mb-6">
   <div className="flex justify-between items-start mb-2">
-    <div>
-      <h3 className="text-lg text-gray-900">Job Title</h3>
-      <p className="text-gray-700">Company Name</p>
-    </div>
-    <span className="text-gray-600">Start Date - End Date</span>
+    <h3 className="text-base text-gray-900">
+      Job Title, <span className="text-gray-700">Company Name</span>
+    </h3>
+    <span className="text-gray-600 text-[0.75rem]">Start Date - End Date</span>
   </div>
   <ul className="list-disc list-inside text-sm text-gray-700 space-y-2 ml-4">
     <li>Achievement or responsibility #1</li>
@@ -283,7 +286,7 @@ Skills are rendered as pill-shaped tags using `.map()` over string arrays. There
 
 ```tsx
 {/* Technical Skills */}
-{["Computer Networking", "Network Infrastructure", "RESTful API", "Game Engines", "VR", "TDD"].map((skill) => (
+{["Distributed Systems", "System Architecture", "Low Latency", "AWS", "Computer Networking", "Network Infrastructure", "RESTful API", "Game Engines", "VR", "TDD"].map((skill) => (
   <span key={skill} className="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs">
     {skill}
   </span>
@@ -325,7 +328,7 @@ Each project is a linked list item:
 #### Header Gradient
 
 ```tsx
-<div className="bg-gradient-to-r from-gray-700 to-gray-900 text-white p-6">
+<div className="bg-gradient-to-r from-gray-700 to-gray-900 text-white p-4">
 ```
 
 | Style | Classes |
@@ -341,7 +344,7 @@ Each project is a linked list item:
 The sidebar uses `bg-gray-50`. Change this class on the right column `<div>` to alter the sidebar tone:
 
 ```tsx
-<div className="bg-gray-50 p-6 right-column-print">
+<div className="bg-gray-50 p-5 right-column-print">
 ```
 
 Use `bg-blue-50`, `bg-slate-100`, or `bg-white` for alternatives. If you change this, also update the matching print style rule in `src/index.css` to preserve the colour when printing:
@@ -387,9 +390,8 @@ Change `w-[794px]` to adjust the page width. If you change this, also update the
 
 #### Spacing
 
-- `p-8` on the left column and `p-6` on the right column control inner padding.
-- `mb-8` on sections controls vertical spacing between sections.
-- `gap-5` in the header controls spacing between the photo and name.
+- `p-4` on the left column and `p-5` on the right column control inner padding.
+- `mb-8` on sections controls vertical spacing between sections (with `print:mb-2` or `print:mb-4` for tighter print output).
 
 ---
 
@@ -399,7 +401,7 @@ Change `w-[794px]` to adjust the page width. If you change this, also update the
 
 ```tsx
 {/* Add inside the left column <div>, after Education */}
-<section className="mb-8">
+<section className="mb-8 print:mb-2">
   <h2 className="text-xl text-gray-800 mb-4 pb-2 border-b-2 border-gray-600">
     Certifications
   </h2>
